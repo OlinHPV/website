@@ -64,7 +64,7 @@
         <?php
         if(!isset($_GET['gallery'])){
 ?>  
-        <h3>Please select a gallery from the menu at the left.</h3>
+        <h3>Select a gallery from the menu at the left. </h3>
         <img src='/files/2014vehicle-side.jpg'>
 <?php
         }
