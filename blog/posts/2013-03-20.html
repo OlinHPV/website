@@ -1,0 +1,37 @@
+<div class=span5>
+  <h2>
+    <a href='?id=2013-03-20'>
+      Front Frame Analysis
+    </a>
+  </h2>
+  <h6>March 20, 2013</h6>
+
+  <p>One of the big questions which has come up when designing the frame for our vehicle is whether or not to cantilever the front frame. Our mount point between the rider's legs is very stiff and this could potentially be a viable option.</p>
+  <p>To help answer this question, we performed some analysis in SolidWorks simulation, a Finite Element Analysis (FEA) package. We simulated the frame mounted from the rear point between the riders legs and applied a 200 lb load upward on the headtube (where the front wheel will be applying its load). With just this load, the simulation predicts a maximum deflection of almost 1/4" on the front of the frame. This does not take into effect side loading or a pedaling rider and is far too much for our comfort so we will not be cantilevering the frame of the vehicle.</p>
+</div>
+
+<div class=span4>
+  <a href='?id=2013-02-01'>
+    <img src='/files/2013CantileverTest.JPG'>
+  </a>
+  <p class=caption>Deformation of the Cantilevered Frame.</p>
+</div>
+
+<div class=span9>
+  <p>With the front frame mounted at the front and back, we checked the stresses and deformations in the frame once again. The von Mises stress for the frame is less than 10% of the yield stress of the steel and the maximum deformation is under .005". Furthermore, a frequency study indicates that the lowest natural frequency of the frame is at roughly 135 Hz, far above what we expect to experience from either a pedaling rider (max of 2-3 Hz) or bumps on the road.</p>
+  <p>This analysis, combined with the fact that this frame is extremely similar to our frame from last year, gave us the confidence to move forward with this design. However, we were not satisfied.</p>
+</div>
+
+<div class=span3>
+  <a href='/files/2013AlumFrameFEA.png' target=_blank><img src='/files/2013AlumFrameFEA.png'></a>
+  <p class=caption>Stress in the Aluminum Frame.</p>
+</div>
+<div class=span6>
+  <p>Although our steel frame design is plenty strong, the welded square tubes over the round tubes at the bearing interface points make it heavy and very hard to manufacture. We decided to explore the option of replacing the steel round tube altogether with thin-wall welded aluminum rectangular extrusion. The rectangular profile makes the bearing interface much easier. The biggest concern in this design was that the 6061-T6 aluminum will lose its temper and become much weaker in the heat affected zone of the welds at the joints.</p>
+  <p>The team ran a FEA simulation of the frame, using surface elements with a highly refined mesh in the areas surrounding the joints. After applying the front wheel load (250 lb rider x 65% rider weight on front wheel x 3 Gs) and the pedaling loads, it was found that the frame had a factor of safety of over 1.5 at all areas except at the front angled bend of the frame, an area which is easily gussetted. This factor of safety was caculated with the yield stress for 6061-O, which will be the condition of the frame at its weakest points, the weld heat affected zones.</p>
+</div>
+
+<div class=span9>
+  <p>It is interesting to note that the pedaling loads actually help balance out the fork loads so the stress was highest when the pedaling load was not applied. However, the factor of safety was maintained in this simulation.</p>
+  <p>The results of this analysis combined with the fact that a rectangular aluminum tube will be incredibly easy to weld give us confidence to at least try a version of this frame on the vehicle. We will add gussets in the areas of concern highlighted by the FEA and will test it in the coming weeks.</p>
+</div>
