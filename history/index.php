@@ -1,22 +1,23 @@
-<?php 
+<?php
 require('../style/common.php');
-buildheader('History');
 $perpage = 10;
 
 function get_post_list(){
-  $dh = opendir('posts');
   $files = array();
-  while (($file = readdir($dh)) !== false) { 
-    if($file !== '.' && $file !== '..') { 
-      $ex = explode('.',$file);
-      $files[] = $ex[0];
-    } 
+  foreach(scandir('posts') as $file){
+    $file = explode('.',$file);
+    if(strlen($file[0]))
+      $files[] = $file[0];
   }
-  return $files;
+  return array_reverse($files);
 }
 
 function show_single_post($id){
-  echo file_get_contents('posts/'.$id.'.html');
+  $post = file_get_contents('posts/'.$id.'.html');
+  preg_match('#<h([2])>(.+?)</h\1>#is', $post, $matches);
+  $title = strip_tags($matches[0]);
+  buildheader('History',$title);
+  echo $post;
   ?>
     <div class=span9>
       <div class="fb-like" data-href="http://hpv.olin.edu/history/?id=<?php echo $id; ?>" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial"></div>
@@ -28,13 +29,46 @@ function show_single_post($id){
 
 function show_post_synopsis($id){
   ?>
-    <div class='span9 coverup'>
-      <div class='row coverup'>
+    <div class='span9'>
+      <div class='row'>
   <?php
-  echo file_get_contents('posts/'.$id.'.html');
+
+  $post = file_get_contents('posts/'.$id.'.html');
+  $post = str_replace("\n", ' ', $post);
+
+  // Get Image
+  preg_match('/<img[^>]*>/', $post, $matches);
+  $image = '';
+  if(isset($matches[0]))
+    $image = $matches[0];
+
+  // Get Title
+  preg_match('~<h2>(.*)</h2>~', $post, $matches);
+  $title = '';
+  if(isset($matches[0]))
+    $title = $matches[0];
+
+  // Get Date
+  preg_match('~<h6>(.*)</h6>~', $post, $matches);
+  $date = '';
+  if(isset($matches[0]))
+    $date = $matches[0];
+
+  // Excerpt
+  $post = preg_replace('~<h2>(.*)</h2>~', '', $post);
+  $post = preg_replace('~<h6>(.*)</h6>~', '', $post);
+  $post = strip_tags($post, '<p>');
+  $post = preg_split('/\s+/', $post);
+  $post = array_slice($post, 0, 125);
+  $post = implode(' ', $post);
+
+  if($image != '')
+  	echo '<div class=span5>'.$title.$date.$post.'</div><div class=span4><a href="?id='.$id.'">'.$image.'</a></div>';
+  else  	
+  	echo '<div class=span9>'.$title.$date.$post.'</div>';
+
   ?>
       </div>
-      <div class=bottomgrad>&nbsp;</div>
     </div>
     <div class=span9>
       <a class=btn href="?id=<?php echo $id; ?>">Read More <i class="icon-chevron-right"></i></a>
@@ -49,6 +83,7 @@ if(isset($_GET['id']) && file_exists('posts/'.$_GET['id'].'.html')){
 
 //IF INDEX PAGE
 }else{
+  buildheader('History');
 
   //PAGINATION
   if(isset($_GET['p']) && is_numeric($_GET['p']) && $_GET['p']>1){
@@ -58,10 +93,10 @@ if(isset($_GET['id']) && file_exists('posts/'.$_GET['id'].'.html')){
     $firstpost = 0;
     $currentpage = 1;
   }
-  
+
   //GET POSTS
-  $posts = array_reverse(get_post_list());
-  
+  $posts = get_post_list();
+
   //SHOW POSTS
   for($i=$firstpost;$i<$firstpost+$perpage;$i++){
     if(isset($posts[$i])){
