@@ -7,7 +7,7 @@ function buildheader($currentpage,$secondary = NULL){
   $menu[2] = array('History','book','history');
   $menu[3] = array('Blog','tag','blog');
   $menu[4] = array('Sponsors','flag','sponsors');
-  $menu[5] = array('Gallery','th','gallery');
+  $menu[5] = array('Gallery','th',false,'https://www.flickr.com/photos/olinhpv/sets/');
 ?>
   <!DOCTYPE html>
   <html>
@@ -75,9 +75,19 @@ function buildheader($currentpage,$secondary = NULL){
             <?php
               foreach($menu as $item){
                 if($currentpage == $item[0]){
-                  echo '<li class="active"><a href="/'.$item[2].'/"><i class="icon-'.$item[1].'"></i> '.$item[0].'</a></li>';
+                  if(!$item[2]){
+                  	echo '<li class="active"><a href="/"><i class="icon-'.$item[1].'"></i> '.$item[0].'</a></li>';
+                  }else{
+                  	echo '<li class="active"><a href="/'.$item[2].'/"><i class="icon-'.$item[1].'"></i> '.$item[0].'</a></li>';
+                  }
                 }else{
-                  echo '<li><a href="/'.$item[2].'/"><i class="icon-'.$item[1].'"></i> '.$item[0].'</a></li>';
+                  if(!$item[2] && $item[2] !== false){
+                  	echo '<li><a href="/"><i class="icon-'.$item[1].'"></i> '.$item[0].'</a></li>';
+                  }else if($item[2] !== false){
+                  	echo '<li><a href="/'.$item[2].'/"><i class="icon-'.$item[1].'"></i> '.$item[0].'</a></li>';
+                  }else{
+                  	echo '<li><a href="'.$item[3].'" target=_blank><i class="icon-'.$item[1].'"></i> '.$item[0].'</a></li>';
+                  }
                 }
               }
             ?>
