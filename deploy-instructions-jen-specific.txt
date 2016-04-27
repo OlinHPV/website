@@ -14,7 +14,7 @@ cd /var/www/virtual/hpv.olin.edu/html
 unzip uploadfile
 rm uploadfile.zip
 
-[EMPTY CONTENT OF HPV SITE]
+[EMPTY CONTENT OF HPV SITE] <-- Had some issues with this, so maybe don't do it?
 rm -rf /var/www/virtual/hpv.olin.edu/html/* 
 
 [COPY CONTENT FROM THE UNZIPPED FOLDER INTO THE HPV SITE]
@@ -22,3 +22,5 @@ cp -fR hpv.olin.edu/html/* /var/www/virtual/hpv.olin.edu/html/
 
 
 rm -rf hpv.olin.edu/
+
+ren *.JPG *.jpg if issues with extensions
