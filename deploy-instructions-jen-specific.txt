@@ -1,3 +1,4 @@
+[CD into directory]
 xcopy * C:\hpv.olin.edu\html\ /s /d /EXCLUDE:.wdignore
 zip -r uploadfile.zip C:/hpv.olin.edu/html/*
 rmdir /s /q C:\hpv.olin.edu
