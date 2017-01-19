@@ -1,11 +1,11 @@
-[CD into directory]
-xcopy * C:\hpv.olin.edu\html\ /s /d /EXCLUDE:.wdignore
+[CD into directory using command prompt]
+xcopy * "C:\hpv.olin.edu\html\" /s /d /EXCLUDE:.wdignore
 zip -r uploadfile.zip C:/hpv.olin.edu/html/*
 rmdir /s /q C:\hpv.olin.edu
 
-[drag pscp from Desktop]
+[Find directory of PSCP]
 
-pscp uploadfile.zip [olincredential]@linwebprod.olin.edu:/var/www/virtual/hpv.olin.edu/html
+C:\putty\PSCP.EXE uploadfile.zip [olincredential]@linwebprod.olin.edu:/var/www/virtual/hpv.olin.edu/html
 
 rm uploadfile.zip
 
