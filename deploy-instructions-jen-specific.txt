@@ -1,4 +1,11 @@
 [CD into directory using command prompt]
+
+TODO: GO INTO ALL TEXTFILES AND CHANGE EVERYTHING TO LOWERCASE EXTENSIONS
+
+[Ensure that everything is lowercase by renaming]
+ren *.PNG *.png
+ren *.JPG *.jpg
+
 xcopy * "C:\hpv.olin.edu\html\" /s /d /EXCLUDE:.wdignore
 zip -r uploadfile.zip C:/hpv.olin.edu/html/*
 rmdir /s /q C:\hpv.olin.edu
@@ -7,7 +14,7 @@ rmdir /s /q C:\hpv.olin.edu
 
 C:\putty\PSCP.EXE uploadfile.zip [olincredential]@linwebprod.olin.edu:/var/www/virtual/hpv.olin.edu/html
 
-rm uploadfile.zip
+del uploadfile.zip
 
 [SSH into linwebprod]
 cd /var/www/virtual/hpv.olin.edu/html
@@ -21,7 +28,12 @@ rm -rf /var/www/virtual/hpv.olin.edu/html/*
 [COPY CONTENT FROM THE UNZIPPED FOLDER INTO THE HPV SITE]
 cp -fR hpv.olin.edu/html/* /var/www/virtual/hpv.olin.edu/html/
 
+[IF ISSUES WITH EXTENSIONS]
 
+ren *.PNG *.png
+ren *.JPG *.jpg
+
+[OTHERWISE DO THIS]
 rm -rf hpv.olin.edu/
 
-ren *.JPG *.jpg if issues with extensions
+
